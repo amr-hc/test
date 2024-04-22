@@ -4,9 +4,9 @@
   <body>
       <p id="profile"></p>
       <script>
-          function sendData() {
+          function sendData(userInput) {
             // Get user input
-            var userInput = "hiiiiiiiii";
+           
             
             // Send data back to the main page
             window.opener.postMessage(userInput, "http://localhost");
@@ -40,7 +40,7 @@
                            
 
                       if (response.authResponse) {
-                        sendData()
+                        sendData(response.authResponse.accessToken)
                            console.log('Welcome!  Fetching your information.... ');
                            FB.api('/me', {fields: 'name, email'}, function(response) {
                            });
