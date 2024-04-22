@@ -34,15 +34,7 @@
             FB.login(function(response) {
               console.log(response)
               document.getElementById("profile").innerHTML =response.authResponse.accessToken
-                      if (response.authResponse) {
-                           console.log('Welcome!  Fetching your information.... ');
-                           FB.api('/me', {fields: 'name, email'}, function(response) {
-                               document.getElementById("profile").innerHTML =response.accessToken
-                           });
-                      } else { 
-                           <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
-                           console.log('User cancelled login or did not fully authorize.'); }
-            });
+                      
         };
 
       </script>
