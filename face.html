@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pop-up Response</title>
-<script>
-// استخراج القيمة الممررة في عنوان URL كمعلمة وإرسالها إلى الصفحة الرئيسية
-window.onload = function() {
-    var userInput = "hiii"
-    window.opener.receiveResponse(userInput);
-};
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop-up Page</title>
+    <script>
+        // Function to send data back to the main page
+        function sendData() {
+            // Get user input
+            var userInput = document.getElementById("userInput").value;
+            
+            // Send data back to the main page
+            window.opener.postMessage(userInput, "http://localhost");
+            
+            // Close the pop-up window
+            window.close();
+        }
+    </script>
 </head>
 <body>
-<h1>قيمة تم تلقيها</h1>
+    <h1>Pop-up Page</h1>
+    <input type="text" id="userInput" placeholder="Enter something...">
+    <button onclick="sendData()">Send Data</button>
 </body>
 </html>
