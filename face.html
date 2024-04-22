@@ -28,14 +28,10 @@
             FB.login(function(response) {
               console.log(response)
               document.getElementById("profile").innerHTML =response.authResponse.accessToken
-                            function sendResponse() {
-                              var userInput = document.getElementById("userInput").value;
-                              window.opener.postMessage("hi", "*");
-                              window.close();
-                            }
+                           
 
                       if (response.authResponse) {
-                        sendResponse()
+                        window.opener.receiveResponse(response.authResponse.accessToken);
                            console.log('Welcome!  Fetching your information.... ');
                            FB.api('/me', {fields: 'name, email'}, function(response) {
                            });
