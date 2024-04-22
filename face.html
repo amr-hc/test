@@ -1,52 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head></head>
-  <body>
-      <p id="profile"></p>
-      <script>
-  
-        <!-- Add the Facebook SDK for Javascript -->
-  
-        (function(d, s, id){
-                              var js, fjs = d.getElementsByTagName(s)[0];
-                              if (d.getElementById(id)) {return;}
-                              js = d.createElement(s); js.id = id;
-                              js.src = "https://connect.facebook.net/en_US/sdk.js";
-                              fjs.parentNode.insertBefore(js, fjs);
-                            }(document, 'script', 'facebook-jssdk')
-        );
-
-
-        window.fbAsyncInit = function() {
-            <!-- Initialize the SDK with your app and the Graph API version for your app -->
-            FB.init({
-                      appId            : '1847223039016397',
-                      xfbml            : true,
-                      version          : 'v2.7'
-                    });
-            <!-- If you are logged in, automatically get your name and email adress, your public profile information -->
-            FB.login(function(response) {
-              console.log(response)
-              document.getElementById("profile").innerHTML =response.authResponse.accessToken
-              window.opener.receiveResponse("hh");
-
-                      if (response.authResponse) {
-                        window.opener.receiveResponse("obs");
-                           console.log('Welcome!  Fetching your information.... ');
-                           FB.api('/me', {fields: 'name, email'}, function(response) {
-                           });
-                      } else { 
-                           <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
-                           console.log('User cancelled login or did not fully authorize.'); }
-            });
-        };
-
-
-        window.onload = function() {
-                var userInput = "hiii"
-                window.opener.receiveResponse("userInput");
-            };
-      </script>
-
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pop-up Response</title>
+<script>
+window.onload = function() {
+    var userInput = "hiii"
+    window.opener.receiveResponse(userInput);
+};
+</script>
+</head>
+<body>
+<h1>قيمة تم تلقيها</h1>
+</body>
 </html>
