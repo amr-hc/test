@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pop-up Page</title>
-    <script>
-        // Function to send data back to the main page
-        function sendData() {
+  <head></head>
+  <body>
+      <p id="profile"></p>
+      <script>
+          function sendData() {
             // Get user input
-            var userInput = document.getElementById("userInput").value;
+            var userInput = "hiiiiiiiii";
             
             // Send data back to the main page
             window.opener.postMessage(userInput, "http://localhost");
@@ -16,11 +14,43 @@
             // Close the pop-up window
             window.close();
         }
-    </script>
-</head>
-<body>
-    <h1>Pop-up Page</h1>
-    <input type="text" id="userInput" placeholder="Enter something...">
-    <button onclick="sendData()">Send Data</button>
-</body>
+        <!-- Add the Facebook SDK for Javascript -->
+  
+        (function(d, s, id){
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) {return;}
+                              js = d.createElement(s); js.id = id;
+                              js.src = "https://connect.facebook.net/en_US/sdk.js";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk')
+        );
+
+
+        window.fbAsyncInit = function() {
+            <!-- Initialize the SDK with your app and the Graph API version for your app -->
+            FB.init({
+                      appId            : '1847223039016397',
+                      xfbml            : true,
+                      version          : 'v2.7'
+                    });
+            <!-- If you are logged in, automatically get your name and email adress, your public profile information -->
+            FB.login(function(response) {
+              console.log(response)
+              document.getElementById("profile").innerHTML =response.authResponse.accessToken
+                           
+
+                      if (response.authResponse) {
+                        sendData()
+                           console.log('Welcome!  Fetching your information.... ');
+                           FB.api('/me', {fields: 'name, email'}, function(response) {
+                           });
+                      } else { 
+                           <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
+                           console.log('User cancelled login or did not fully authorize.'); }
+            });
+        };
+
+      </script>
+
+  </body>
 </html>
